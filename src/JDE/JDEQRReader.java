@@ -3,10 +3,10 @@ package JDE;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Base64;
 import java.util.Properties;
 import java.util.Scanner;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 public class JDEQRReader {
@@ -53,9 +53,18 @@ public class JDEQRReader {
 			try {
 			     JSONObject jsonObject = new JSONObject(dStr);
 			     
-		            System.out.println("TAG" + " ptoVta: " + jsonObject.getString("ptoVta"));
-		            System.out.println("TAG" + " nroCmp: " + jsonObject.getString("nroCmp"));
- 
+			        String Salida = "";
+		            Salida = "Centro Emisor: " + jsonObject.getInt("ptoVta")+"\n";
+		            Salida = Salida + "Tipo: " + jsonObject.getInt("tipoCmp")+"\n";
+		            Salida = Salida + "Nro Comprobante: " + jsonObject.getInt("nroCmp")+"\n";
+		            Salida = Salida + "Cuit: " + jsonObject.getLong("nroDocRec")+"\n";
+		            Salida = Salida + "Fecha: " + jsonObject.getString("fecha").toString()+"\n";
+		            Salida = Salida + "Importe " +jsonObject.getLong("importe")+"\n";
+		            Salida = Salida + "Moneda: " + jsonObject.getString("moneda").toString() +"\n";
+		            Salida = Salida + "Tipo Cambio: " + jsonObject.getInt("ctz") +"\n";
+		            Salida = Salida + "\n "+ "Desea Cargar el Comprobante ?";
+		            System.out.println(Salida.toString());
+
 			}catch (JSONException err){
 			     System.out.println("Error" + err.toString());
 			}
